@@ -49,6 +49,9 @@ public class SecurityConfig {
         http.cors().and().csrf().disable();
         // Aqui podemos permitir/autorizar ou bloquear certos endpoints da aplicação
         http.authorizeRequests()
+                // Libera o request apenas para o verbo POTS para a rota -> /futuros-candidatos como publico
+                .regexMatchers(HttpMethod.POST, "/futuros-candidatos").permitAll()
+                // Libera o request para todos os verbos (GET, POST, PUT, DELETE, PATCH)
                 .antMatchers(PUBLIC_ENDPOINTS).permitAll() // possibilita os endpoints no array serem PUBLICOS
                 .anyRequest().authenticated();
         // Aqui indicamos que não há sessão de usuário, apenas o JWT garante que o usuário possui autorização para acessar
