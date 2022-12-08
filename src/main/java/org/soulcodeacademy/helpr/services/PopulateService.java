@@ -4,12 +4,15 @@ import org.soulcodeacademy.helpr.domain.Cargo;
 import org.soulcodeacademy.helpr.domain.Chamado;
 import org.soulcodeacademy.helpr.domain.Cliente;
 import org.soulcodeacademy.helpr.domain.Funcionario;
+import org.soulcodeacademy.helpr.domain.FuturoCandidato;
 import org.soulcodeacademy.helpr.domain.enums.Perfil;
+import org.soulcodeacademy.helpr.domain.enums.Setor;
 import org.soulcodeacademy.helpr.domain.enums.StatusChamado;
 import org.soulcodeacademy.helpr.repositories.CargoRepository;
 import org.soulcodeacademy.helpr.repositories.ChamadoRepository;
 import org.soulcodeacademy.helpr.repositories.ClienteRepository;
 import org.soulcodeacademy.helpr.repositories.FuncionarioRepository;
+import org.soulcodeacademy.helpr.repositories.FuturoCandidatoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -30,6 +33,9 @@ public class PopulateService {
 
     @Autowired
     private ChamadoRepository chamadoRepository;
+
+    @Autowired
+    private FuturoCandidatoRepository futuroCandidatoRepository;
 
     @Autowired
     private PasswordEncoder encoder;
@@ -116,8 +122,22 @@ public class PopulateService {
         ch7.setFuncionario(adm4);
         ch7.setStatus(StatusChamado.RECEBIDO);
 
+        FuturoCandidato futuroCandidato = new FuturoCandidato();
+        futuroCandidato.setNome("Joane Barros Santos");
+        futuroCandidato.setEmail("joane.barros@hotmail.com");
+        futuroCandidato.setDescricao("Teste");
+        futuroCandidato.setSetor(Setor.DESENVOLVIMENTO);
+
+
+        FuturoCandidato futuroCandidato2 = new FuturoCandidato();
+        futuroCandidato2.setNome("Joane Santos de Almeida");
+        futuroCandidato2.setEmail("joane.santos@hotmail.com");
+        futuroCandidato2.setDescricao("Teste2");
+        futuroCandidato2.setSetor(Setor.SUSTENTACAO);
+
 
         // vamos persistir as entidades = salvar no banco
+        this.futuroCandidatoRepository.saveAll(List.of(futuroCandidato, futuroCandidato2));
         this.cargoRepository.saveAll(List.of(c1, c2, c3));
         this.funcionarioRepository.saveAll(List.of(f1, f2,f4,f5,f6,adm3,adm2,adm4,adm5,adm6));
         this.clienteRepository.saveAll(List.of(cl1, cl2,cl3,cl4));

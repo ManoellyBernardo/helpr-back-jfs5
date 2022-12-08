@@ -5,6 +5,7 @@ import org.soulcodeacademy.helpr.domain.enums.Setor;
 import javax.persistence.Column;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 public class FuturoCandidatoDTO {
 
@@ -19,7 +20,7 @@ public class FuturoCandidatoDTO {
    @NotBlank(message = "Campo descrição é obrigatório")
    private String descricao;
 
-   @NotBlank(message = "Campo descrição é obrigatório")
+   @NotNull(message = "Campo descrição é obrigatório")
    private Setor setor;
 
    public String getNome() {

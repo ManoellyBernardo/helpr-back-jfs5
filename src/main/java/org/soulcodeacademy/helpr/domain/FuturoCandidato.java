@@ -2,7 +2,11 @@ package org.soulcodeacademy.helpr.domain;
 
 import org.soulcodeacademy.helpr.domain.enums.Setor;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class FuturoCandidato {
@@ -14,7 +18,7 @@ public class FuturoCandidato {
     @Column(nullable = false, length = 50)
     private String nome;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true) // Só pode existir um e-mail para cada pessoa no Banco de Dados
     private String email;
 
     @Column(nullable = false, length = 120)
@@ -25,11 +29,15 @@ public class FuturoCandidato {
 
     public FuturoCandidato() {}
 
-    public FuturoCandidato(String nome, String email, String descricao, Setor setor) {
+    public FuturoCandidato(Integer id, String nome, String email, String descricao, Setor setor) {
         this.nome = nome;
         this.email = email;
         this.descricao = descricao;
         this.setor = setor;
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     public String getNome() {
