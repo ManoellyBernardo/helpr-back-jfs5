@@ -4,6 +4,7 @@ import org.soulcodeacademy.helpr.domain.Chamado;
 import org.soulcodeacademy.helpr.domain.Cliente;
 import org.soulcodeacademy.helpr.domain.Funcionario;
 import org.soulcodeacademy.helpr.domain.enums.StatusChamado;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -20,4 +21,6 @@ public interface ChamadoRepository extends JpaRepository<Chamado, Integer> {
     // nativeQuery = ativa a sintaxe do SQL
     @Query(value = "SELECT * FROM chamado WHERE data_abertura BETWEEN :data1 AND :data2", nativeQuery = true)
     List<Chamado> buscarEntreDatas(LocalDate data1, LocalDate data2);
+
+    List<Chamado> findAllByStatusIn(List<StatusChamado> statusChamados);
 }

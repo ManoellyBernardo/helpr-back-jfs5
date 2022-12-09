@@ -26,13 +26,14 @@ public class ChamadoService {
     private FuncionarioService funcionarioService;
 
     public List<Chamado> listarChamados() {
-        return this.chamadoRepository.findAll();
+       List<Chamado> listaChamado = chamadoRepository.findAllByStatusIn(List.of(StatusChamado.RECEBIDO, StatusChamado.CONCLUIDO, StatusChamado.ATRIBUIDO));
+        return listaChamado;
     }
 
     public Chamado getChamado(Integer idChamado) {
         // Caso não encontre o chamado, lança a exceção.
         return this.chamadoRepository.findById(idChamado)
-                .orElseThrow(() -> new RecursoNaoEncontradoError("Chamado não encontrado"));
+                .orElseThrow(() -> new RecursoNaoEncontradoError("Chamado não encontrado."));
     }
 
     public Chamado salvar(ChamadoDTO dto) {
