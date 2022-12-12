@@ -3,6 +3,7 @@ package org.soulcodeacademy.helpr.services;
 import org.soulcodeacademy.helpr.domain.Cliente;
 import org.soulcodeacademy.helpr.domain.dto.ClienteDTO;
 import org.soulcodeacademy.helpr.repositories.ClienteRepository;
+import org.soulcodeacademy.helpr.services.errors.ParametrosInsuficientesError;
 import org.soulcodeacademy.helpr.services.errors.RecursoNaoEncontradoError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,9 @@ public class ClienteService {
     }
 
     public Cliente salvar(ClienteDTO dto) {
+        if(dto.getSenha().isBlank()){
+            throw new ParametrosInsuficientesError("Senha é obrigatória!");
+        }
         // Criação da entidade Cliente, a partir dos dados validados do DTO
         Cliente novoCliente = new Cliente(null, dto.getNome(), dto.getEmail(), dto.getCpf(), dto.getSenha(), dto.getTelefone());
 
