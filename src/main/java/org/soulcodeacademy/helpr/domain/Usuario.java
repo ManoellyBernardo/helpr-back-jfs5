@@ -22,7 +22,7 @@ public abstract class Usuario { // Não será possível criar objetos desta clas
     protected String cpf;
 
     @JsonIgnore // impede a leitura da senha no JSON
-    @Column(nullable = false)
+    @Column()
     protected String senha;
 
     // Representa os valores do ENUM como texto

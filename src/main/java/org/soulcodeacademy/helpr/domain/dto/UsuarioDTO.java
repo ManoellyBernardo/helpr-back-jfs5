@@ -1,6 +1,7 @@
 package org.soulcodeacademy.helpr.domain.dto;
 
 import org.hibernate.validator.constraints.br.CPF;
+import org.soulcodeacademy.helpr.services.errors.RecursoNaoEncontradoError;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -19,7 +20,6 @@ public abstract class UsuarioDTO {
     @NotBlank(message = "CPF é obrigatório")
     protected String cpf;
 
-    @NotBlank(message = "Senha é obrigatória")
     protected String senha;
 
     public String getNome() {
